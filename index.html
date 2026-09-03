@@ -1,9 +1,397 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>PicoVISTA</title>
-</head>
-<body>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="PicoVISTA is a 78M-parameter on-device robot manipulation framework that distills for routine control and reasons selectively about risky decisions."
+    />
+    <meta name="theme-color" content="#071f2d" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="PicoVISTA — Small Policy, Selective Reasoning" />
+    <meta
+      property="og:description"
+      content="Robust on-device robot manipulation with a compact policy and risk-triggered world-model reasoning."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PicoVISTA — Small Policy, Selective Reasoning" />
+    <meta
+      name="twitter:description"
+      content="A 78M-parameter, 50 MB deployment for robust on-device manipulation."
+    />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+    <title>PicoVISTA — Small Policy, Selective Reasoning</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" data-header>
+      <div class="nav-shell">
+        <a class="brand" href="#top" aria-label="PicoVISTA home">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>PicoVISTA</span>
+        </a>
+        <nav class="desktop-nav" aria-label="Primary navigation">
+          <a href="#overview">Overview</a>
+          <a href="#method">Method</a>
+          <a href="#results">Results</a>
+          <a href="#results" data-open-tab="tab-edge">Deployment</a>
+        </nav>
+        <a class="review-chip" href="#anonymity">
+          <span></span>
+          Double-blind preview
+        </a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-glow hero-glow-one"></div>
+        <div class="hero-glow hero-glow-two"></div>
+        <div class="shell hero-grid">
+          <div class="hero-copy reveal">
+            <p class="eyebrow"><span>On-device embodied AI</span><em>Research preview · 2027</em></p>
+            <h1><span>Pico</span>VISTA</h1>
+            <p class="hero-kicker">Small policy.<br /><strong>Selective reasoning.</strong></p>
+            <p class="hero-summary">
+              Robust robot manipulation on resource-constrained hardware—without running a
+              foundation VLA at every control step.
+            </p>
+            <div class="author-block" id="anonymity">
+              <div class="author-avatar" aria-hidden="true">A</div>
+              <div>
+                <p>Anonymous Authors</p>
+                <span>Affiliations withheld for double-blind review</span>
+              </div>
+            </div>
+            <div class="hero-actions" aria-label="Project resources">
+              <button class="resource-button resource-primary" type="button" disabled>
+                Paper <span>Coming soon</span>
+              </button>
+              <button class="resource-button" type="button" disabled>
+                Code <span>Coming soon</span>
+              </button>
+              <a class="resource-link" href="#citation">BibTeX <span>↓</span></a>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal" data-delay="1">
+            <div class="visual-topline">
+              <span>Propose</span>
+              <i></i>
+              <span>Predict</span>
+              <i></i>
+              <span>Intervene</span>
+            </div>
+            <div class="hero-image-wrap">
+              <img
+                src="assets/system-overview.jpg"
+                alt="PicoVISTA system overview showing the compact student policy, latent world model, risk assessment, and selective intervention path."
+                fetchpriority="high"
+              />
+            </div>
+            <p class="figure-caption">
+              <span>Fig. 1</span> Routine actions stay on the fast path. Only risky decisions
+              trigger counterfactual evaluation.
+            </p>
+          </div>
+        </div>
+
+        <div class="shell metric-rail reveal" data-delay="2" aria-label="Key results">
+          <article><strong>78M</strong><span>parameters</span><small>46.4× smaller than Teacher</small></article>
+          <article><strong>50 MB</strong><span>deployment</span><small>complete on-device stack</small></article>
+          <article><strong>96.4%</strong><span>LIBERO success</span><small>0.5 pp from Teacher</small></article>
+          <article><strong>89.8%</strong><span>physical success</span><small>8 single + bimanual tasks</small></article>
+          <article><strong>−76.7%</strong><span>reasoning time</span><small>vs. always-trigger</small></article>
+        </div>
+      </section>
+
+      <section class="section section-paper" id="overview">
+        <div class="shell">
+          <div class="section-intro reveal">
+            <p class="section-index">01 / Motivation</p>
+            <h2>Stop paying the<br /><em>generality tax.</em></h2>
+            <p>
+              Foundation VLAs are built for an open world, but deployed robots repeatedly visit a
+              much smaller local world. PicoVISTA turns that mismatch into an opportunity: preserve
+              deployment-relevant capability in a tiny Student, then recover robustness only when
+              the nominal decision looks unsafe.
+            </p>
+          </div>
+
+          <div class="mismatch-grid">
+            <article class="mismatch-card teacher reveal">
+              <div class="card-label"><span>Foundation Teacher</span><b>Generalist</b></div>
+              <div class="parameter-number">3.62<span>B</span></div>
+              <p>parameters evaluated for broad visual-language-action capability.</p>
+              <div class="capacity-bar"><i></i></div>
+              <small>Full capability · full cost · every decision</small>
+            </article>
+            <div class="transfer-mark reveal" aria-hidden="true">
+              <span>46.4×</span>
+              <i>→</i>
+              <small>knowledge transfer</small>
+            </div>
+            <article class="mismatch-card student reveal" data-delay="1">
+              <div class="card-label"><span>PicoVISTA</span><b>Specialist</b></div>
+              <div class="parameter-number">78<span>M</span></div>
+              <p>parameters for fast local control plus selective predictive reasoning.</p>
+              <div class="capacity-bar"><i></i></div>
+              <small>Routine fast path · reasoning on demand</small>
+            </article>
+          </div>
+
+          <figure class="paper-figure reveal">
+            <img
+              src="assets/deployment-locality.jpg"
+              alt="Analysis of representation locality across robot tasks and deployment domains."
+              loading="lazy"
+            />
+            <figcaption>
+              <span>Observation</span>
+              Repeated executions occupy compact representation regions; cross-simulator distances
+              exceed same-task distances by more than 8×.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section section-ink" id="method">
+        <div class="shell">
+          <div class="section-intro section-intro-light reveal">
+            <p class="section-index">02 / Method</p>
+            <h2>Distill the routine.<br /><em>Reason on demand.</em></h2>
+            <p>
+              PicoVISTA combines future-aware policy distillation, dual-view latent prediction,
+              and a rescue–harm-aware gate. The system spends extra compute only when a different
+              action is predicted to change the outcome.
+            </p>
+          </div>
+
+          <div class="method-steps" aria-label="PicoVISTA method stages">
+            <article class="method-step reveal">
+              <span class="step-number">01</span>
+              <div>
+                <h3>Compress</h3>
+                <p>Transfer control-relevant representations, actions, and future consequences into a compact stochastic Student.</p>
+              </div>
+              <strong>Routine path</strong>
+            </article>
+            <article class="method-step reveal" data-delay="1">
+              <span class="step-number">02</span>
+              <div>
+                <h3>Imagine</h3>
+                <p>Roll out nominal and alternative action chunks in a dual-view latent world model—no pixel reconstruction required.</p>
+              </div>
+              <strong>Risk trigger</strong>
+            </article>
+            <article class="method-step reveal" data-delay="2">
+              <span class="step-number">03</span>
+              <div>
+                <h3>Intervene</h3>
+                <p>Balance short-term semantic progress with long-term continuation value, replacing the action only when helpful and safe.</p>
+              </div>
+              <strong>Benefit gate</strong>
+            </article>
+          </div>
+
+          <div class="method-feature reveal">
+            <div class="feature-copy">
+              <p class="mini-label">Future-aware distillation</p>
+              <h3>Three stages, one deployable policy.</h3>
+              <p>
+                Representation and action distillation initialize the Student. On-policy refinement
+                then corrects states that the Student actually visits and aligns the predicted
+                consequences of Student and Teacher actions.
+              </p>
+              <ul class="feature-list">
+                <li><span>1</span>Control-relevant representation transfer</li>
+                <li><span>2</span>Stochastic action behavior transfer</li>
+                <li><span>3</span>On-policy, world-model-aligned refinement</li>
+              </ul>
+            </div>
+            <figure>
+              <img
+                src="assets/student-distillation.jpg"
+                alt="Three-stage student policy distillation diagram."
+                loading="lazy"
+              />
+              <figcaption>Representation → action → on-policy consequence alignment</figcaption>
+            </figure>
+          </div>
+
+          <div class="method-feature method-feature-reverse reveal">
+            <div class="feature-copy">
+              <p class="mini-label">Dual-view latent world model</p>
+              <h3>See the scene—and the contact.</h3>
+              <p>
+                The agent view preserves global context while the wrist view captures local,
+                contact-sensitive detail. Shared action-conditioned dynamics predict compact latent
+                futures for each candidate.
+              </p>
+              <div class="view-pills" aria-label="World model input views">
+                <span><i class="global-dot"></i>Agent view · global context</span>
+                <span><i class="local-dot"></i>Wrist view · local contact</span>
+              </div>
+            </div>
+            <figure>
+              <img
+                src="assets/dual-view-world-model.jpg"
+                alt="Dual-view latent world model architecture."
+                loading="lazy"
+              />
+              <figcaption>Predict task-relevant futures, not raw pixels</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-results" id="results">
+        <div class="shell">
+          <div class="section-intro reveal">
+            <p class="section-index">03 / Evidence</p>
+            <h2>Small footprint.<br /><em>Near-Teacher success.</em></h2>
+            <p>
+              Evaluated across three simulation benchmarks, five mobile and edge platforms, and
+              eight physical single- and bimanual tasks.
+            </p>
+          </div>
+
+          <div class="tabs reveal">
+            <div class="tab-list" role="tablist" aria-label="Result categories">
+              <button id="tab-sim" role="tab" aria-selected="true" aria-controls="panel-sim" tabindex="0">Simulation</button>
+              <button id="tab-real" role="tab" aria-selected="false" aria-controls="panel-real" tabindex="-1">Physical robots</button>
+              <button id="tab-edge" role="tab" aria-selected="false" aria-controls="panel-edge" tabindex="-1">On-device cost</button>
+            </div>
+
+            <div class="tab-panel" id="panel-sim" role="tabpanel" aria-labelledby="tab-sim">
+              <div class="result-lead">
+                <div>
+                  <p class="mini-label">LIBERO · 40 tasks</p>
+                  <strong>96.4<span>%</span></strong>
+                  <p>Average success, within 0.5 percentage points of the 3.62B-parameter Teacher.</p>
+                </div>
+                <div class="benchmark-list" aria-label="LIBERO suite success rates">
+                  <div><span>Spatial</span><b>98.4%</b><i style="--score: 98.4%"></i></div>
+                  <div><span>Object</span><b>99.2%</b><i style="--score: 99.2%"></i></div>
+                  <div><span>Goal</span><b>94.6%</b><i style="--score: 94.6%"></i></div>
+                  <div><span>Long</span><b>93.2%</b><i style="--score: 93.2%"></i></div>
+                </div>
+              </div>
+              <div class="result-figure-grid">
+                <figure>
+                  <img src="assets/trigger-effectiveness.jpg" alt="Selective triggering matches always-trigger success while reducing cumulative inference time." loading="lazy" />
+                  <figcaption><b>Trigger only when needed.</b> Selective intervention matches always-trigger success with 76.7% less cumulative inference time.</figcaption>
+                </figure>
+                <figure>
+                  <img src="assets/candidate-tradeoff.jpg" alt="Candidate budget trade-off for PicoVISTA." loading="lazy" />
+                  <figcaption><b>Eight candidates hit the knee.</b> Success saturates while triggered-path latency keeps rising beyond K = 8.</figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div class="tab-panel" id="panel-real" role="tabpanel" aria-labelledby="tab-real" hidden>
+              <div class="real-world-grid">
+                <div class="real-copy">
+                  <p class="mini-label">SO-ARM101 · single + bimanual</p>
+                  <strong>89.8<span>%</span></strong>
+                  <p>Average success across eight physical tasks; every task remains at or above 87%.</p>
+                  <div class="split-metrics">
+                    <div><b>91.3%</b><span>single-arm average</span></div>
+                    <div><b>88.3%</b><span>bimanual average</span></div>
+                  </div>
+                </div>
+                <figure class="setup-figure">
+                  <img src="assets/robot-setups.jpg" alt="Single-arm and bimanual SO-ARM101 evaluation platforms." loading="lazy" />
+                  <figcaption>Single-arm and dual-arm physical platforms with global and wrist cameras.</figcaption>
+                </figure>
+              </div>
+              <figure class="task-strip">
+                <img src="assets/task-frames.jpg" alt="Execution sequences for three example bimanual manipulation tasks." loading="lazy" />
+                <figcaption>Example bimanual rollouts: drawer placement, circle placement, and bowl stacking.</figcaption>
+              </figure>
+            </div>
+
+            <div class="tab-panel" id="panel-edge" role="tabpanel" aria-labelledby="tab-edge" hidden>
+              <div class="edge-summary">
+                <div>
+                  <p class="mini-label">Qualcomm AI Engine Direct</p>
+                  <h3>Everything runs locally.</h3>
+                  <p>Candidate generation, latent rollout, action evaluation, gating, and receding-horizon control execute without cloud inference.</p>
+                </div>
+                <div class="device-badge">
+                  <span>Primary platform</span>
+                  <strong>Rubik Pi 3</strong>
+                  <small>Qualcomm QCS6490 SoC</small>
+                </div>
+              </div>
+              <div class="result-figure-grid">
+                <figure>
+                  <img src="assets/device-latency.jpg" alt="Inference latency across five mobile and edge platforms." loading="lazy" />
+                  <figcaption><b>Fast path by default.</b> The standalone Student takes 5.65–7.21 ms on four phone and reference platforms.</figcaption>
+                </figure>
+                <figure>
+                  <img src="assets/device-memory.jpg" alt="Peak memory across five mobile and edge platforms." loading="lazy" />
+                  <figcaption><b>Compact even when triggered.</b> Full candidate evaluation uses 103.59–209.54 MB across devices.</figcaption>
+                </figure>
+              </div>
+              <div class="resource-triptych">
+                <figure><img src="assets/task-memory.jpg" alt="Task-level peak memory on Rubik Pi 3." loading="lazy" /><figcaption>Peak memory stays below 268 MB.</figcaption></figure>
+                <figure><img src="assets/task-latency.jpg" alt="Task-level cumulative inference latency on Rubik Pi 3." loading="lazy" /><figcaption>7.10–23.33 s cumulative neural inference.</figcaption></figure>
+                <figure><img src="assets/task-energy.jpg" alt="Task-level inference energy on Rubik Pi 3." loading="lazy" /><figcaption>127.72–419.99 J per task request.</figcaption></figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-takeaway">
+        <div class="shell takeaway-grid reveal">
+          <p class="section-index">04 / Takeaway</p>
+          <blockquote>
+            Practical embodied systems need not choose between an expensive generalist and a brittle
+            specialist.
+          </blockquote>
+          <div class="takeaway-aside">
+            <p>
+              Make specialization the common path—and reserve predictive reasoning for the decisions
+              where it changes the outcome.
+            </p>
+            <a href="#top">Back to top <span>↑</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-citation" id="citation">
+        <div class="shell citation-grid reveal">
+          <div>
+            <p class="section-index">Citation</p>
+            <h2>Anonymized for review.</h2>
+            <p>Author and venue metadata will be updated after the double-blind review period.</p>
+          </div>
+          <div class="code-card">
+            <button type="button" class="copy-button" data-copy-bib aria-label="Copy BibTeX citation">Copy</button>
+            <pre><code id="bibtex">@article{anonymous2027picovista,
+  title  = {PicoVISTA: Small Policy, Selective Reasoning
+            for Robust On-Device Robot Manipulation},
+  author = {Anonymous Authors},
+  year   = {2027}
+}</code></pre>
+            <p class="copy-status" aria-live="polite" data-copy-status></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="footer-brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><b>PicoVISTA</b></div>
+        <p>Anonymous project page · Under double-blind review</p>
+        <p>© 2027 Anonymous Authors</p>
+      </div>
+    </footer>
+  </body>
 </html>
