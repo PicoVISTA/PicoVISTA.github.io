@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     url: '/',
     title: 'PicoVISTA — Small Policy, Selective Reasoning',
     description: 'Distill for routine control. Reason on demand.',
-    images: [{ url: '/og.png', width: 1536, height: 1024, alt: 'PicoVISTA project preview' }],
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'PicoVISTA project preview' }],
   },
   twitter: {
     card: 'summary_large_image',

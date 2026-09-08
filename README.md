@@ -21,6 +21,24 @@ pnpm build
 
 The static site is emitted to `dist/client`.
 
+Run all local checks with:
+
+```bash
+pnpm check
+```
+
+## GitHub Pages deployment
+
+The workflow in `.github/workflows/deploy-pages.yml` builds and deploys the site whenever `main` is pushed. In the repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions** once, then push normally:
+
+```bash
+git add .
+git commit -m "Configure GitHub Pages deployment"
+git push origin main
+```
+
+The published site is expected at `https://picovista.github.io/`.
+
 ## Content notes
 
 - The current manuscript is anonymized for double-blind review, so author names and permanent publication links are intentionally omitted.
